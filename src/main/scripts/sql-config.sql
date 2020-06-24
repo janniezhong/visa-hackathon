@@ -1,5 +1,21 @@
-## Use to run mysql db docker image, optional if you're not using a local mysqldb
-# docker run --name mysqldb -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql
+## With MySQL
+# mysql -u root -p
+## If the previous command gets you "command not found", try
+#  alias mysql=/usr/local/mysql/bin/mysql
+## and then run the first command again
+
+## With Docker
+# For mac
+# sudo launchctl unload -F /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
+
+## Use to run mysql db docker image
+# docker run -p 3306:3306 --name hack_mysql -e MYSQL_ROOT_PASSWORD=password -d mysql
+## Open a MySQL editor in command line
+# docker exec -it hack_mysql mysql -u root -p
+## password should just be "password" (yay security)
+
+
+
 
 # connect to mysql and run as root user
 #Create Databases
