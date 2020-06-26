@@ -39,19 +39,21 @@ GRANT UPDATE ON db.* to 'db_user'@'%';
 
 #Create table
 use db;
-create table input (id bigint not null auto_increment, name varchar(255),  primary key (id));
+create table input (pan varchar(255), card_id varchar(255), country varchar(255), state varchar(255), city varchar(255),  company_name varchar(255),
+                    amount_loaned decimal(12, 2), issue_date TIMESTAMP, payment_plan varchar(255), expected_end_date TIMESTAMP,
+                    next_inspection_date TIMESTAMP, loan_officer varchar(255), primary key (pan));
 
-#Example Stored Procedure
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `db`.`getRecord` $$
-CREATE PROCEDURE `db`.`getRecord` (
-    IN in_id INTEGER,
-    OUT out_name VARCHAR(255))
-BEGIN
-    SELECT name
-    INTO out_name
-    FROM input where id = in_id;
-END $$
-
-DELIMITER ;
+# #Example Stored Procedure
+# DELIMITER $$
+#
+# DROP PROCEDURE IF EXISTS `db`.`getRecord` $$
+# CREATE PROCEDURE `db`.`getRecord` (
+#     IN in_id INTEGER,
+#     OUT out_name VARCHAR(255))
+# BEGIN
+#     SELECT name
+#     INTO out_name
+#     FROM input where id = in_id;
+# END $$
+#
+# DELIMITER ;

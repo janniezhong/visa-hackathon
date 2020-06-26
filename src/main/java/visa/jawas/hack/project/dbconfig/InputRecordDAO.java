@@ -1,6 +1,7 @@
 package visa.jawas.hack.project.dbconfig;
 
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -15,12 +16,23 @@ public interface InputRecordDAO {
     /**
      * Creates a record in the Input table.
      */
-    void create(String name);
+    void create(String pan,
+                String card_id,
+                String country,
+                String state,
+                String city,
+                String company_name,
+                Integer amount_loaned,
+                Timestamp issue_date,
+                String payment_plan,
+                Timestamp expected_end_date,
+                Timestamp next_inspection_date,
+                String loan_officer);
 
     /**
      * Lists a record from the Input table corresponding to a passed Input id.
      */
-    InputRecord getRecord(Integer id);
+    //InputRecord getRecord(Integer id);
 
     /**
      * Lists all the records from the Input table.
