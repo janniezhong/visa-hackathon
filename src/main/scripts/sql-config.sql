@@ -43,6 +43,11 @@ create table input (pan varchar(255), card_id varchar(255), country varchar(255)
                     amount_loaned decimal(12, 2), issue_date TIMESTAMP, payment_plan varchar(255), expected_end_date TIMESTAMP,
                     next_inspection_date TIMESTAMP, loan_officer varchar(255), primary key (pan));
 
+# Insert dummy data
+
+
+
+
 # #Example Stored Procedure
 # DELIMITER $$
 #
