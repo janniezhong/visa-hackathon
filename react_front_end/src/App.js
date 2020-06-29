@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import axios from 'axios';
+
+//Import Components and CSS Files
+import './App.css';
+import Homepage from './Components/Homepage.js';
+import './Components/Homepage.css'
 
 class App extends Component {
 
@@ -28,10 +32,7 @@ class App extends Component {
         </header>
 
         {!this.state.pageSelected ?
-          <div className="App-homepage">
-            <h1>Welcome!</h1>
-            {this.state.name}
-          </div> :
+        <Homepage className='Homepage'></Homepage> :
 
 
           <div>Page not selected</div>
