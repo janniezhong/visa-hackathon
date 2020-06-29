@@ -9,7 +9,7 @@ import visa.jawas.hack.project.Entities.Loan;
 @Controller
 public class RestController {
 
-    @RequestMapping(value="/rest/homepage", method= RequestMethod.GET)
+    @RequestMapping(value="/rest/get", method= RequestMethod.GET)
     public @ResponseBody ResponseEntity<Object> getAll() {
         return null;
     }

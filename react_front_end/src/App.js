@@ -6,9 +6,7 @@ import axios from 'axios';
 class App extends Component {
 
   componentDidMount () {
-
-
-    axios.get('http://192.168.1.6:8080/rest/homepage')
+    axios.get('http://localhost:8080/rest/get')
         .then(response => {
           console.log("hi there!");
         })
