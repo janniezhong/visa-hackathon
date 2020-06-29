@@ -9,18 +9,33 @@ import './Components/Homepage.css'
 
 class App extends Component {
 
+  constructor () {
+    super()
+    this.displayHandler = this.displayHandler.bind(this)
+  }
+
+  state = {
+    name: 'Austin',
+    loanSelected: false,
+    selectedLoan: ''
+  }
+
+  displayHandler = () => {
+    this.setState({
+      loanSelected: true,
+      selectedLoan: 'sucess'
+    })
+  } 
+
+
+
+
   componentDidMount () {
     axios.get('http://localhost:8080/rest/get')
         .then(response => {
           console.log("hi there!");
         })
   }
-
-  state = {
-    name: 'Austin',
-    pageSelected: false
-  }
-
 
 
   render() {
@@ -31,11 +46,11 @@ class App extends Component {
           <h1 className="App-title">This is the navbar</h1>
         </header>
 
-        {!this.state.pageSelected ?
-        <Homepage className='Homepage'></Homepage> :
+        {!this.state.loanSelected ?
+        <Homepage className='Homepage' displayHandler={this.displayHandler} parentState={this.state}></Homepage> :
 
 
-          <div>Page not selected</div>
+          <div>{this.state.selectedLoan}</div>
         }
 
       

@@ -6,7 +6,8 @@ export default class LoanCard extends React.Component {
     render () {
         return (
             <div className='LoanCard'>
-                <h3>Card Component</h3>
+                <p>Card Component</p>
+                <button onClick={this.props.displayHandler}>View</button>
             </div>
             
         )
