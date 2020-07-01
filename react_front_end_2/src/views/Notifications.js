@@ -122,6 +122,12 @@ class Notifications extends React.Component {
                   <CardTitle tag="h4">Upcoming Check Ins</CardTitle>
                 </CardHeader>
                 <CardBody>
+                  <UncontrolledAlert color="danger">
+                    <span>
+                      <b>Warning - </b>
+                      You have an upcoming check-in on 06/28/2020.
+                    </span>
+                  </UncontrolledAlert>
                   <UncontrolledAlert color="primary">
                     <span>
                       <b>Primary - </b>
@@ -144,12 +150,6 @@ class Notifications extends React.Component {
                     <span>
                       <b>Warning - </b>
                       This is a regular notification made with ".alert-warning"
-                    </span>
-                  </UncontrolledAlert>
-                  <UncontrolledAlert color="danger">
-                    <span>
-                      <b>Danger - </b>
-                      This is a regular notification made with ".alert-danger"
                     </span>
                   </UncontrolledAlert>
                 </CardBody>

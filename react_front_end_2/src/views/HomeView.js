@@ -72,7 +72,6 @@ class HomeView extends React.Component {
         return items.map((row, index) => {
             return <tr key={index}><RenderRow key={index} data={row} keys={keys}/></tr>
         })
-
     }
     getHeader = function(){
         var keys = this.getKeys();

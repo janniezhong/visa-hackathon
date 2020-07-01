@@ -144,4 +144,25 @@ public class InputRecord {
     public void setLoan_officer(String loan_officer) {
         this.loan_officer = loan_officer;
     }
+
+    @Override
+    public String toString() {
+        return "InputRecord{" +
+                "pan='" + pan + '\'' +
+                ", card_id='" + card_id + '\'' +
+                ", company_name='" + company_name + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", amount_loaned=" + amount_loaned +
+                ", payment_plan='" + payment_plan + '\'' +
+                ", issue_date=" + issue_date +
+                ", expected_end_date=" + expected_end_date +
+                ", next_inspection_date=" + next_inspection_date +
+                ", loan_officer='" + loan_officer + '\'' +
+                '}';
+    }
 }

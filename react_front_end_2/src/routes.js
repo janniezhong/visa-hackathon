@@ -52,19 +52,19 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    rtlName: "لوحة القيادة",
-    icon: "tim-icons icon-chart-pie-36",
-    component: Dashboard,
-    layout: "/admin"
-  },
-  {
     path: "/notifications",
     name: "Notifications",
     rtlName: "إخطارات",
     icon: "tim-icons icon-bell-55",
     component: Notifications,
+    layout: "/admin"
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Dashboard,
     layout: "/admin"
   },
   {
@@ -84,14 +84,6 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/notifications",
-    name: "Notifications",
-    rtlName: "إخطارات",
-    icon: "tim-icons icon-bell-55",
-    component: Notifications,
-    layout: "/admin"
-  },
-  {
     path: "/tables",
     name: "Table List",
     rtlName: "قائمة الجدول",
@@ -106,14 +98,6 @@ var routes = [
     icon: "tim-icons icon-align-center",
     component: Typography,
     layout: "/admin"
-  },
-  {
-    path: "/rtl-support",
-    name: "RTL Support",
-    rtlName: "ار تي ال",
-    icon: "tim-icons icon-world",
-    component: Rtl,
-    layout: "/rtl"
   }
 ];
 export default routes;

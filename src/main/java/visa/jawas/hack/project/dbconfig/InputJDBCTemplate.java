@@ -1,5 +1,6 @@
 package visa.jawas.hack.project.dbconfig;
 
+//import jdk.internal.util.xml.impl.Input;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -7,6 +8,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 
 import javax.sql.DataSource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +27,7 @@ public class InputJDBCTemplate implements InputRecordDAO {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcCall =  new SimpleJdbcCall(dataSource).withProcedureName("getRecord");
+        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
     }
 
     @Override
@@ -67,7 +70,7 @@ public class InputJDBCTemplate implements InputRecordDAO {
 
     @Override
     public List<InputRecord> listRecords() {
-        String SQL = "select * from Input";
+        String SQL = "select * from input";
         List <InputRecord> records = jdbcTemplateObject.query(SQL, new InputMapper());
         return records;
     }

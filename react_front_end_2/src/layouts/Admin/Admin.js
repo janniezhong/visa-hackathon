@@ -40,9 +40,9 @@ class Admin extends React.Component {
   constructor(props) {
     super(props);
 
-    axios.get('http://localhost:8080/rest/get')
+    axios.get('http://localhost:8080/RestController/homepage')
         .then(response => {
-          console.log("hi there!");
+          console.log(response.data);
         })
 
 

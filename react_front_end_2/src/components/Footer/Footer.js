@@ -27,7 +27,7 @@ class Footer extends React.Component {
   render() {
     return (
       <footer className="footer">
-        <Container fluid>cd ..
+        <Container fluid>
           {/*<Nav>*/}
           {/*  <NavItem>*/}
           {/*    <NavLink href="https://www.creative-tim.com/?ref=bdr-user-archive-footer">Creative Tim</NavLink>*/}

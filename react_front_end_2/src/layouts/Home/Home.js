@@ -40,9 +40,9 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
 
-        axios.get('http://localhost:8080/rest/get')
+        axios.get('http://localhost:8080/RestController/homepage')
             .then(response => {
-                console.log("hi there!");
+                console.log(response.data);
             })
 
         this.state = {
@@ -191,12 +191,17 @@ class Home extends React.Component {
                                 loanList={this.state.loanList}>
                             </HomeView> : null
                         }
+
+                        {/*<a href="/create"> Click me!</a>*/}
+
                         {// we don't want the Footer to be rendered on map page
                             this.props.location.pathname.indexOf("maps") !== -1 ? null : (
                                 <Footer fluid />
                             )}
                     </div>
                 </div>
+
+
                 {/*<FixedPlugin*/}
                 {/*    bgColor={this.state.backgroundColor}*/}
                 {/*    handleBgClick={this.handleBgClick}*/}

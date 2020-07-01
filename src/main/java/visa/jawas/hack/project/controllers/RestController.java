@@ -36,7 +36,7 @@ public class RestController {
     CloseableHttpClient httpClient;
 
     private static final String KEY_STORE_PASSWORD = "changeit";
-    private static final String KEY_STORE_PATH = "C:\\Program Files\\Java\\jdk-14.0.1\\lib\\security\\cacerts.jks";
+    private static final String KEY_STORE_PATH = "/Users/janniezhong/Projects/cacerts.jks";
 
     @Autowired
     public RestController() throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException {
@@ -58,7 +58,7 @@ public class RestController {
                 .setSSLSocketFactory(sslSocketFactory).build();
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/RestController/homepage", method = RequestMethod.GET)
     public @ResponseBody
     ResponseEntity<Object> getAll() throws IOException {
@@ -67,7 +67,7 @@ public class RestController {
         for (InputRecord record : inputRecords) {
             responses.add(getCardInfo(record.getCard_id()));
         }
-        System.out.println(responses);
+        System.out.println("Response: " + responses); // not printing!
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
@@ -79,7 +79,7 @@ public class RestController {
         return httpResponse;
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/RestController/createLoan", method = RequestMethod.POST)
     public String createLoan(@RequestBody Loan loan) throws IOException, JSONException {
         HttpPost httpPost = new HttpPost("https://sandbox.api.visa.com/dcas/cardservices/v1/cards");
