@@ -1,5 +1,7 @@
 import React from  'react';
 import './LoanCard.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button } from 'reactstrap';
 
 export default class LoanCard extends React.Component {
 
@@ -12,12 +14,11 @@ export default class LoanCard extends React.Component {
     render () {
         return (
             <div className='LoanCard'>
-                <p>Card Component </p>
-                <p>{this.props.name} </p>
-                <p>{this.props.loanID} </p>
-                <p>{this.props.info}</p>
+                <h1 style={{marginBottom:'20px'}}>{this.props.name} </h1>
+                <p>Loan ID Number: {this.props.loanID} </p>
+                <p>Company Description: {this.props.info}</p>
                 
-                <button onClick={this.callDisplayHandler}>View</button>
+                <Button color="primary" onClick={this.callDisplayHandler}>View</Button>
             </div>
             
         )
