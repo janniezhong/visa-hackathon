@@ -41,17 +41,17 @@ public class RestController {
     @Autowired
     public RestController() throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException {
         context = new ClassPathXmlApplicationContext("Beans.xml");
-        inputJDBCTemplate = (InputJDBCTemplate)context.getBean("inputJDBCTemplate");
+        inputJDBCTemplate = (InputJDBCTemplate) context.getBean("inputJDBCTemplate");
         KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
         InputStream keyStoreData = new FileInputStream(KEY_STORE_PATH);
         ks.load(keyStoreData, KEY_STORE_PASSWORD.toCharArray());
         SSLContext sslcontext = SSLContexts.custom()
-                        .loadTrustMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray())
-                        .loadKeyMaterial(ks, KEY_STORE_PASSWORD.toCharArray())
-                        .build();
+                .loadTrustMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray())
+                .loadKeyMaterial(ks, KEY_STORE_PASSWORD.toCharArray())
+                .build();
 
         // Allow TLSv1.2 protocol only
-        SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1.2" }, null,
+        SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslcontext, new String[]{"TLSv1.2"}, null,
                 SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 
         httpClient = HttpClients.custom()
@@ -59,11 +59,12 @@ public class RestController {
     }
 
     @CrossOrigin
-    @RequestMapping(value="/RestController/homepage", method= RequestMethod.GET)
-    public @ResponseBody ResponseEntity<Object> getAll() throws IOException {
+    @RequestMapping(value = "/RestController/homepage", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseEntity<Object> getAll() throws IOException {
         List<InputRecord> inputRecords = inputJDBCTemplate.listRecords();
         List<HttpResponse> responses = new ArrayList<>();
-        for (InputRecord record : inputRecords){
+        for (InputRecord record : inputRecords) {
             responses.add(getCardInfo(record.getCard_id()));
         }
         System.out.println(responses);
@@ -79,7 +80,7 @@ public class RestController {
     }
 
     @CrossOrigin
-    @RequestMapping(value="/RestController/createLoan", method= RequestMethod.POST)
+    @RequestMapping(value = "/RestController/createLoan", method = RequestMethod.POST)
     public String createLoan(@RequestBody Loan loan) throws IOException, JSONException {
         HttpPost httpPost = new HttpPost("https://sandbox.api.visa.com/dcas/cardservices/v1/cards");
         String body = "{\"cardIdModel\":[{\"pan\":\"" + loan.getCardNum()
@@ -88,7 +89,7 @@ public class RestController {
         httpPost.setEntity(entity);
         HttpResponse httpResponse = httpClient.execute(httpPost);
         HttpEntity response = httpResponse.getEntity();
-        if(response != null){
+        if (response != null) {
             String src = EntityUtils.toString(response);
             JSONObject result = new JSONObject(src);
             System.out.println(result);

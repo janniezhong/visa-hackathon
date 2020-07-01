@@ -10,16 +10,43 @@ import java.sql.Timestamp;
 public class InputRecord {
     private String pan;
     private String card_id;
-    private String country;
-    private String state;
-    private String city;
     private String company_name;
-    private Integer amount_loaned;
-    private Timestamp issue_date;
+    private String address;
+    private String city;
+    private String state;
+    private String country;
+    private String phone;
+    private String email;
+    private Double amount_loaned;
     private String payment_plan;
+    private Timestamp issue_date;
     private Timestamp expected_end_date;
     private Timestamp next_inspection_date;
     private String loan_officer;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getPan() {
         return pan;
@@ -65,16 +92,16 @@ public class InputRecord {
         return company_name;
     }
 
-    public void setCompany_name(String name) {
+    public void setCompany_name(String company_name) {
         this.company_name = company_name;
     }
 
 
-    public Integer getAmount_loaned() {
+    public Double getAmount_loaned() {
         return amount_loaned;
     }
 
-    public void setAmount_loaned(Integer amount_loaned) {
+    public void setAmount_loaned(Double amount_loaned) {
         this.amount_loaned = amount_loaned;
     }
 
