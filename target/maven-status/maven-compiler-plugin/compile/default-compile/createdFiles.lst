@@ -1,0 +1,10 @@
+visa\jawas\hack\project\dbconfig\InputRecordDAO.class
+visa\jawas\hack\project\configurations\WebSecurityConfig.class
+visa\jawas\hack\project\configurations\XMLConfiguration.class
+visa\jawas\hack\project\dbconfig\InputMapper.class
+visa\jawas\hack\project\Entities\Loan.class
+visa\jawas\hack\project\controllers\MainController.class
+visa\jawas\hack\project\dbconfig\InputJDBCTemplate.class
+visa\jawas\hack\project\controllers\RestController.class
+visa\jawas\hack\project\Application.class
+visa\jawas\hack\project\dbconfig\InputRecord.class
