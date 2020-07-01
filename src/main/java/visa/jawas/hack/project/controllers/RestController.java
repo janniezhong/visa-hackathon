@@ -23,7 +23,6 @@ import visa.jawas.hack.project.dbconfig.InputJDBCTemplate;
 import visa.jawas.hack.project.dbconfig.InputRecord;
 import javax.net.ssl.SSLContext;
 import java.io.*;
-import java.net.URI;
 import java.security.*;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
@@ -38,75 +37,44 @@ public class RestController {
 
     private static final String KEY_STORE_PASSWORD = "changeit";
     private static final String KEY_STORE_PATH = "C:\\Program Files\\Java\\jdk-14.0.1\\lib\\security\\cacerts.jks";
-    private static final String PRIVATE_KEY_PASSWORD = "";
 
     @Autowired
-    public RestController() throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException {
+    public RestController() throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException {
         context = new ClassPathXmlApplicationContext("Beans.xml");
         inputJDBCTemplate = (InputJDBCTemplate)context.getBean("inputJDBCTemplate");
-        SSLContext sslcontext = null;
         KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
         InputStream keyStoreData = new FileInputStream(KEY_STORE_PATH);
         ks.load(keyStoreData, KEY_STORE_PASSWORD.toCharArray());
-        {
-            try {
-                sslcontext = SSLContexts.custom()
+        SSLContext sslcontext = SSLContexts.custom()
                         .loadTrustMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray())
                         .loadKeyMaterial(ks, KEY_STORE_PASSWORD.toCharArray())
                         .build();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            } catch (KeyManagementException e) {
-                e.printStackTrace();
-            } catch (KeyStoreException e) {
-                e.printStackTrace();
-            } catch (UnrecoverableKeyException e) {
-                e.printStackTrace();
-            } catch (CertificateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
         // Allow TLSv1.2 protocol only
         SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1.2" }, null,
                 SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 
-        CloseableHttpClient httpClient = HttpClients.custom()
+        httpClient = HttpClients.custom()
                 .setSSLSocketFactory(sslSocketFactory).build();
     }
 
-    //SSL still needs to be properly configured
-    // Load client certificate into key store
-
-//    SSLConfiguration sslConfiguration = new SSLConfiguration();
-//    sslConfiguration.setKeyStore(keyStoreFile);
-//    sslConfiguration.setKeyStorePassword(keyStorePwd);
-//    sslConfiguration.setTrustStore(trustStoreFile);
-//    sslConfiguration.setTrustStorePassword(trustStorePwd);
-//    sslConfiguration.setAllowAllHosts(true);
-
     @CrossOrigin
     @RequestMapping(value="/RestController/homepage", method= RequestMethod.GET)
-    public @ResponseBody ResponseEntity<Object> getAll() {
+    public @ResponseBody ResponseEntity<Object> getAll() throws IOException {
         List<InputRecord> inputRecords = inputJDBCTemplate.listRecords();
         List<HttpResponse> responses = new ArrayList<>();
         for (InputRecord record : inputRecords){
             responses.add(getCardInfo(record.getCard_id()));
         }
+        System.out.println(responses);
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
-    private HttpResponse getCardInfo(String cardId){
+    private HttpResponse getCardInfo(String cardId) throws IOException {
         HttpGet httpGet = new HttpGet("https://sandbox.api.visa.com/dcas/cardservices/v1/cards/"
                 + cardId + "?lookUpBalances=true");
-        HttpResponse httpResponse = null;
-        try {
-            httpResponse = httpClient.execute(httpGet);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HttpResponse httpResponse = httpClient.execute(httpGet);
+        //System.out.println(httpResponse);
         return httpResponse;
     }
 
@@ -123,9 +91,9 @@ public class RestController {
         if(response != null){
             String src = EntityUtils.toString(response);
             JSONObject result = new JSONObject(src);
+            System.out.println(result);
             return result.getJSONObject("resources").getJSONArray("cards").getJSONObject(0).getJSONObject("cardId").toString();
         }
         return null;
     }
-
 }
