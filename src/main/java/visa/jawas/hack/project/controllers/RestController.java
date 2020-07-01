@@ -21,17 +21,10 @@ import visa.jawas.hack.project.Entities.Loan;
 import org.apache.http.ssl.SSLContexts;
 import visa.jawas.hack.project.dbconfig.InputJDBCTemplate;
 import visa.jawas.hack.project.dbconfig.InputRecord;
-
 import javax.net.ssl.SSLContext;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URI;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
+import java.security.*;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,49 +34,58 @@ public class RestController {
 
     ApplicationContext context;
     InputJDBCTemplate inputJDBCTemplate;
+    CloseableHttpClient httpClient;
+
+    private static final String KEY_STORE_PASSWORD = "changeit";
+    private static final String KEY_STORE_PATH = "C:\\Program Files\\Java\\jdk-14.0.1\\lib\\security\\cacerts.jks";
+    private static final String PRIVATE_KEY_PASSWORD = "";
 
     @Autowired
-    public RestController() {
+    public RestController() throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException {
         context = new ClassPathXmlApplicationContext("Beans.xml");
         inputJDBCTemplate = (InputJDBCTemplate)context.getBean("inputJDBCTemplate");
+        SSLContext sslcontext = null;
+        KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
+        InputStream keyStoreData = new FileInputStream(KEY_STORE_PATH);
+        ks.load(keyStoreData, KEY_STORE_PASSWORD.toCharArray());
+        {
+            try {
+                sslcontext = SSLContexts.custom()
+                        .loadTrustMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray())
+                        .loadKeyMaterial(ks, KEY_STORE_PASSWORD.toCharArray())
+                        .build();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (KeyManagementException e) {
+                e.printStackTrace();
+            } catch (KeyStoreException e) {
+                e.printStackTrace();
+            } catch (UnrecoverableKeyException e) {
+                e.printStackTrace();
+            } catch (CertificateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Allow TLSv1.2 protocol only
+        SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1.2" }, null,
+                SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setSSLSocketFactory(sslSocketFactory).build();
     }
 
     //SSL still needs to be properly configured
-
-    private static final String KEY_STORE_PASSWORD = "changeit";
-    private static final String KEY_STORE_PATH = "cacerts.jks";
-    private static final String PRIVATE_KEY_PASSWORD = "changeit";
     // Load client certificate into key store
-    SSLContext sslcontext;
 
-    {
-        try {
-            sslcontext = SSLContexts.custom()
-                    .loadTrustMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray())
-                    .loadKeyMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray(),
-                            PRIVATE_KEY_PASSWORD.toCharArray())
-                    .build();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        } catch (KeyStoreException e) {
-            e.printStackTrace();
-        } catch (UnrecoverableKeyException e) {
-            e.printStackTrace();
-        } catch (CertificateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Allow TLSv1.2 protocol only
-    SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1.2" }, null,
-            SSLConnectionSocketFactory.getDefaultHostnameVerifier());
-
-    CloseableHttpClient httpClient = HttpClients.custom()
-            .setSSLSocketFactory(sslSocketFactory).build();
+//    SSLConfiguration sslConfiguration = new SSLConfiguration();
+//    sslConfiguration.setKeyStore(keyStoreFile);
+//    sslConfiguration.setKeyStorePassword(keyStorePwd);
+//    sslConfiguration.setTrustStore(trustStoreFile);
+//    sslConfiguration.setTrustStorePassword(trustStorePwd);
+//    sslConfiguration.setAllowAllHosts(true);
 
     @CrossOrigin
     @RequestMapping(value="/RestController/homepage", method= RequestMethod.GET)
