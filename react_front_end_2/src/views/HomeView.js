@@ -42,14 +42,32 @@ class HomeView extends React.Component {
         this.getRowsData = this.getRowsData.bind(this);
         this.getKeys = this.getKeys.bind(this);
 
+        this.state = {
+            loans: JSON.parse(JSON.stringify(this.props.loanList))
+        }
+        for(let i = 0; i < this.state.loans.length; i++) {
+            delete this.state.loans[i]['pan'];
+            delete this.state.loans[i]['card_id'];
+            delete this.state.loans[i]['address'];
+            delete this.state.loans[i]['city'];
+            delete this.state.loans[i]['state'];
+            delete this.state.loans[i]['phone'];
+            delete this.state.loans[i]['email'];
+            delete this.state.loans[i]['amount_loaned'];
+            delete this.state.loans[i]['issue_date'];
+            delete this.state.loans[i]['expected_end_date'];
+        }
+
+
+
     }
 
     getKeys = function(){
-        return Object.keys(this.props.loanList[0]);
+        return Object.keys(this.state.loans[0]);
 
     }
     getRowsData = function(){
-        var items = this.props.loanList;
+        var items = this.state.loans;
         var keys = this.getKeys();
         return items.map((row, index) => {
             return <tr key={index}><RenderRow key={index} data={row} keys={keys}/></tr>
@@ -78,7 +96,7 @@ class HomeView extends React.Component {
 
 
     render() {
-        const loanList = this.props.loanList;
+        const loanList = this.state.loans;
         if (!loanList){
             console.log("something is wrong!");
             return null;
@@ -94,11 +112,28 @@ class HomeView extends React.Component {
                             <CardBody>
                                 <Table className="tablesorter">
                                     <thead className="text-primary">
-                                    {
-                                        loanList ? (
-                                            <tr> {this.getHeader()} </tr>
-                                        ) :null
-                                    }
+                                    {/*{*/}
+                                    {/*    loanList ? (*/}
+                                    {/*        <tr> {this.getHeader()} </tr>*/}
+                                    {/*    ) :null*/}
+                                    {/*}*/}
+                                    <tr>
+                                        <th>
+                                            Company Name
+                                        </th>
+                                        <th>
+                                            Location
+                                        </th>
+                                        <th>
+                                            Payment Plan
+                                        </th>
+                                        <th>
+                                            Next Inspection Date
+                                        </th>
+                                        <th>
+                                            Loan Officer
+                                        </th>
+                                    </tr>
                                     </thead>
                                     <tbody>
                                     {
@@ -120,7 +155,7 @@ class HomeView extends React.Component {
 const RenderRow = (props) =>{
     return props.keys.map((key, index)=>{
 
-        if (key == "Name"){
+        if (key == "company_name"){
             return <td key={props.data[key]}>
                 <NavLink
                     to={{

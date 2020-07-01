@@ -31,63 +31,68 @@ import {
   Row,
   Col
 } from "reactstrap";
+import {Route} from "react-router-dom";
+import HomeView from "./HomeView";
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      loans: JSON.parse(JSON.stringify(this.props.loanList)),
+      selectedLoan: null
+    }
+
+    for(let i = 0; i < this.state.loans.length; i++) {
+      if ((!this.props.loanName)){
+        if ((this.props.location.state.name).localeCompare(this.state.loans[i]['company_name']) == 0){
+          this.state = {
+            loans: JSON.parse(JSON.stringify(this.props.loanList)),
+            selectedLoan: this.state.loans[i]
+          }
+          break;
+        }
+      }
+      else {
+        if ((this.props.loanName).localeCompare(this.state.loans[i]['company_name']) == 0){
+         this.state = {
+            loans: JSON.parse(JSON.stringify(this.props.loanList)),
+            selectedLoan: this.state.loans[i]
+          }
+          break;
+        }
+      }
+    }
   }
 
 
   render() {
-    console.log(this.props);
+    // console.log("Userprofile");
+    // console.log(this.props);
+    const loan = this.state.selectedLoan;
+    if (!loan){
+      console.log("something is wrong! (userprofile)");
+      return null;
+    }
+
     return (
       <>
         <div className="content">
           <Row>
             <Col md="12">
               <Card>
-                <CardHeader>
-                  <h5 className="title">Edit Profile</h5>
-                </CardHeader>
+                {/*<CardHeader>*/}
+                {/*  <h5 className="title">Company Profile</h5>*/}
+                {/*</CardHeader>*/}
                 <CardBody>
                   <Form>
                     <Row>
                       <Col className="pr-md-1" md="5">
                         <FormGroup>
-                          <label>Company</label>
+                          <label>Company Name</label>
                           <Input
-                            defaultValue="Creative Code Inc."
+                            defaultValue={loan['company_name']}
                             placeholder="Company"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      {/*<Col className="px-md-1" md="3">*/}
-                      {/*  <FormGroup>*/}
-                      {/*    <label>Username</label>*/}
-                      {/*    <Input*/}
-                      {/*      defaultValue="michael23"*/}
-                      {/*      placeholder="Username"*/}
-                      {/*      type="text"*/}
-                      {/*    />*/}
-                      {/*  </FormGroup>*/}
-                      {/*</Col>*/}
-                      {/*<Col className="pl-md-1" md="4">*/}
-                      {/*  <FormGroup>*/}
-                      {/*    <label htmlFor="exampleInputEmail1">*/}
-                      {/*      Email address*/}
-                      {/*    </label>*/}
-                      {/*    <Input placeholder="mike@email.com" type="email" />*/}
-                      {/*  </FormGroup>*/}
-                      {/*</Col>*/}
-                    </Row>
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label>Address</label>
-                          <Input
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                            placeholder="Home Address"
                             type="text"
                           />
                         </FormGroup>
@@ -96,9 +101,19 @@ class UserProfile extends React.Component {
                     <Row>
                       <Col className="pr-md-1" md="4">
                         <FormGroup>
+                          <label>Address</label>
+                          <Input
+                              defaultValue={loan['address']}
+                              placeholder="Home Address"
+                              type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="pr-md-1" md="4">
+                        <FormGroup>
                           <label>City</label>
                           <Input
-                            defaultValue="Mike"
+                            defaultValue={loan['city']}
                             placeholder="City"
                             type="text"
                           />
@@ -108,33 +123,51 @@ class UserProfile extends React.Component {
                         <FormGroup>
                           <label>Country</label>
                           <Input
-                            defaultValue="Andrew"
+                            defaultValue={loan['country']}
                             placeholder="Country"
                             type="text"
                           />
                         </FormGroup>
                       </Col>
-                      <Col className="pl-md-1" md="4">
-                        <FormGroup>
-                          <label>Postal Code</label>
-                          <Input placeholder="ZIP Code" type="number" />
-                        </FormGroup>
-                      </Col>
                     </Row>
                     <Row>
-                      <Col md="8">
+                      <Col className="pr-md-1" md="3">
                         <FormGroup>
-                          <label>About Me</label>
+                          <label>Phone</label>
                           <Input
-                            cols="80"
-                            defaultValue="Insert Description here."
-                            placeholder="Here can be your description"
-                            rows="4"
-                            type="textarea"
+                              defaultValue={loan['phone']}
+                              placeholder="Phone"
+                              type="text"
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col className="pl-md-1" md="4">
+                        <FormGroup>
+                          <label htmlFor="exampleInputEmail1">
+                            Email address
+                          </label>
+                          <Input
+                              defaultValue={loan['email']}
+                              placeholder="abc@xyz.com"
+                              type="email"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
+                    {/*<Row>*/}
+                    {/*  <Col md="8">*/}
+                    {/*    <FormGroup>*/}
+                    {/*      <label>About Me</label>*/}
+                    {/*      <Input*/}
+                    {/*        cols="80"*/}
+                    {/*        defaultValue="Insert Description here."*/}
+                    {/*        placeholder="Here can be your description"*/}
+                    {/*        rows="4"*/}
+                    {/*        type="textarea"*/}
+                    {/*      />*/}
+                    {/*    </FormGroup>*/}
+                    {/*  </Col>*/}
+                    {/*</Row>*/}
                   </Form>
                 </CardBody>
                 <CardFooter>

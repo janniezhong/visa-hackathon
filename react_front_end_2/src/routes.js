@@ -24,6 +24,7 @@ import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
 import HomeView from "views/HomeView.js";
+import LoanProfile from "./views/LoanProfile";
 
 var routes = [
   // {
@@ -43,11 +44,27 @@ var routes = [
     layout: "/admin"
   },
   {
+    path: "/loan",
+    name: "Loan Details",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: "tim-icons icon-coins",
+    component: LoanProfile,
+    layout: "/admin"
+  },
+  {
     path: "/dashboard",
     name: "Dashboard",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: Dashboard,
+    layout: "/admin"
+  },
+  {
+    path: "/notifications",
+    name: "Notifications",
+    rtlName: "إخطارات",
+    icon: "tim-icons icon-bell-55",
+    component: Notifications,
     layout: "/admin"
   },
   {

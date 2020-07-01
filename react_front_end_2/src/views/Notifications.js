@@ -80,46 +80,46 @@ class Notifications extends React.Component {
             <NotificationAlert ref="notificationAlert" />
           </div>
           <Row>
-            <Col md="6">
+            {/*<Col md="6">*/}
+            {/*  <Card>*/}
+            {/*    <CardHeader>*/}
+            {/*      <CardTitle tag="h4">Notifications Style</CardTitle>*/}
+            {/*    </CardHeader>*/}
+            {/*    <CardBody>*/}
+            {/*      <Alert color="info">*/}
+            {/*        <span>This is a plain notification</span>*/}
+            {/*      </Alert>*/}
+            {/*      <UncontrolledAlert color="info">*/}
+            {/*        <span>This is a notification with close button.</span>*/}
+            {/*      </UncontrolledAlert>*/}
+            {/*      <UncontrolledAlert className="alert-with-icon" color="info">*/}
+            {/*        <span*/}
+            {/*          className="tim-icons icon-bell-55"*/}
+            {/*          data-notify="icon"*/}
+            {/*        />*/}
+            {/*        <span data-notify="message">*/}
+            {/*          This is a notification with close button and icon.*/}
+            {/*        </span>*/}
+            {/*      </UncontrolledAlert>*/}
+            {/*      <UncontrolledAlert className="alert-with-icon" color="info">*/}
+            {/*        <span*/}
+            {/*          className="tim-icons icon-bell-55"*/}
+            {/*          data-notify="icon"*/}
+            {/*        />*/}
+            {/*        <span data-notify="message">*/}
+            {/*          This is a notification with close button and icon and have*/}
+            {/*          many lines. You can see that the icon and the close button*/}
+            {/*          are always vertically aligned. This is a beautiful*/}
+            {/*          notification. So you don't have to worry about the style.*/}
+            {/*        </span>*/}
+            {/*      </UncontrolledAlert>*/}
+            {/*    </CardBody>*/}
+            {/*  </Card>*/}
+            {/*</Col>*/}
+            <Col md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Notifications Style</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <Alert color="info">
-                    <span>This is a plain notification</span>
-                  </Alert>
-                  <UncontrolledAlert color="info">
-                    <span>This is a notification with close button.</span>
-                  </UncontrolledAlert>
-                  <UncontrolledAlert className="alert-with-icon" color="info">
-                    <span
-                      className="tim-icons icon-bell-55"
-                      data-notify="icon"
-                    />
-                    <span data-notify="message">
-                      This is a notification with close button and icon.
-                    </span>
-                  </UncontrolledAlert>
-                  <UncontrolledAlert className="alert-with-icon" color="info">
-                    <span
-                      className="tim-icons icon-bell-55"
-                      data-notify="icon"
-                    />
-                    <span data-notify="message">
-                      This is a notification with close button and icon and have
-                      many lines. You can see that the icon and the close button
-                      are always vertically aligned. This is a beautiful
-                      notification. So you don't have to worry about the style.
-                    </span>
-                  </UncontrolledAlert>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="6">
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h4">Notification states</CardTitle>
+                  <CardTitle tag="h4">Upcoming Check Ins</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <UncontrolledAlert color="primary">
@@ -155,89 +155,89 @@ class Notifications extends React.Component {
                 </CardBody>
               </Card>
             </Col>
-            <Col md="12">
-              <Card>
-                <CardBody>
-                  <div className="places-buttons">
-                    <Row>
-                      <Col className="ml-auto mr-auto text-center" md="6">
-                        <CardTitle tag="h4">
-                          Notifications Places<p className="category">
-                            Click to view notifications
-                          </p>
-                        </CardTitle>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="ml-auto mr-auto" lg="8">
-                        <Row>
-                          <Col md="4">
-                            <Button
-                              block
-                              color="primary"
-                              onClick={() => this.notify("tl")}
-                            >
-                              Top Left
-                            </Button>
-                          </Col>
-                          <Col md="4">
-                            <Button
-                              block
-                              color="primary"
-                              onClick={() => this.notify("tc")}
-                            >
-                              Top Center
-                            </Button>
-                          </Col>
-                          <Col md="4">
-                            <Button
-                              block
-                              color="primary"
-                              onClick={() => this.notify("tr")}
-                            >
-                              Top Right
-                            </Button>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="ml-auto mr-auto" lg="8">
-                        <Row>
-                          <Col md="4">
-                            <Button
-                              block
-                              color="primary"
-                              onClick={() => this.notify("bl")}
-                            >
-                              Bottom Left
-                            </Button>
-                          </Col>
-                          <Col md="4">
-                            <Button
-                              block
-                              color="primary"
-                              onClick={() => this.notify("bc")}
-                            >
-                              Bottom Center
-                            </Button>
-                          </Col>
-                          <Col md="4">
-                            <Button
-                              block
-                              color="primary"
-                              onClick={() => this.notify("br")}
-                            >
-                              Bottom Right
-                            </Button>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
+            {/*<Col md="12">*/}
+            {/*  <Card>*/}
+            {/*    <CardBody>*/}
+            {/*      <div className="places-buttons">*/}
+            {/*        <Row>*/}
+            {/*          <Col className="ml-auto mr-auto text-center" md="6">*/}
+            {/*            <CardTitle tag="h4">*/}
+            {/*              Notifications Places<p className="category">*/}
+            {/*                Click to view notifications*/}
+            {/*              </p>*/}
+            {/*            </CardTitle>*/}
+            {/*          </Col>*/}
+            {/*        </Row>*/}
+            {/*        <Row>*/}
+            {/*          <Col className="ml-auto mr-auto" lg="8">*/}
+            {/*            <Row>*/}
+            {/*              <Col md="4">*/}
+            {/*                <Button*/}
+            {/*                  block*/}
+            {/*                  color="primary"*/}
+            {/*                  onClick={() => this.notify("tl")}*/}
+            {/*                >*/}
+            {/*                  Top Left*/}
+            {/*                </Button>*/}
+            {/*              </Col>*/}
+            {/*              <Col md="4">*/}
+            {/*                <Button*/}
+            {/*                  block*/}
+            {/*                  color="primary"*/}
+            {/*                  onClick={() => this.notify("tc")}*/}
+            {/*                >*/}
+            {/*                  Top Center*/}
+            {/*                </Button>*/}
+            {/*              </Col>*/}
+            {/*              <Col md="4">*/}
+            {/*                <Button*/}
+            {/*                  block*/}
+            {/*                  color="primary"*/}
+            {/*                  onClick={() => this.notify("tr")}*/}
+            {/*                >*/}
+            {/*                  Top Right*/}
+            {/*                </Button>*/}
+            {/*              </Col>*/}
+            {/*            </Row>*/}
+            {/*          </Col>*/}
+            {/*        </Row>*/}
+            {/*        <Row>*/}
+            {/*          <Col className="ml-auto mr-auto" lg="8">*/}
+            {/*            <Row>*/}
+            {/*              <Col md="4">*/}
+            {/*                <Button*/}
+            {/*                  block*/}
+            {/*                  color="primary"*/}
+            {/*                  onClick={() => this.notify("bl")}*/}
+            {/*                >*/}
+            {/*                  Bottom Left*/}
+            {/*                </Button>*/}
+            {/*              </Col>*/}
+            {/*              <Col md="4">*/}
+            {/*                <Button*/}
+            {/*                  block*/}
+            {/*                  color="primary"*/}
+            {/*                  onClick={() => this.notify("bc")}*/}
+            {/*                >*/}
+            {/*                  Bottom Center*/}
+            {/*                </Button>*/}
+            {/*              </Col>*/}
+            {/*              <Col md="4">*/}
+            {/*                <Button*/}
+            {/*                  block*/}
+            {/*                  color="primary"*/}
+            {/*                  onClick={() => this.notify("br")}*/}
+            {/*                >*/}
+            {/*                  Bottom Right*/}
+            {/*                </Button>*/}
+            {/*              </Col>*/}
+            {/*            </Row>*/}
+            {/*          </Col>*/}
+            {/*        </Row>*/}
+            {/*      </div>*/}
+            {/*    </CardBody>*/}
+            {/*  </Card>*/}
+            {/*</Col>*/}
           </Row>
         </div>
       </>

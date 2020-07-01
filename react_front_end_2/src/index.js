@@ -31,7 +31,6 @@ import "assets/scss/black-dashboard-react.scss";
 //import "assets/demo/demo.css";
 //import "assets/scss/black-dashboard-react.css";
 import "assets/css/nucleo-icons.css";
-import Home from "./layouts/Home/Home";
 
 const hist = createBrowserHistory();
 
