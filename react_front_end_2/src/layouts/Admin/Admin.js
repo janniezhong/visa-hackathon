@@ -28,18 +28,37 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
-import logo from "assets/img/react-logo.png";
+import logo from "assets/img/visa-logo.png";
+import axios from "axios";
+import UserProfile from "../../views/UserProfile";
+import Dashboard from "../../views/Dashboard";
 
 var ps;
 
 class Admin extends React.Component {
   constructor(props) {
     super(props);
+
+    axios.get('http://localhost:8080/rest/get')
+        .then(response => {
+          console.log("hi there!");
+        })
+
+
     this.state = {
       backgroundColor: "blue",
       sidebarOpened:
-        document.documentElement.className.indexOf("nav-open") !== -1
+        document.documentElement.className.indexOf("nav-open") !== -1,
+      loanList: [
+        {'Name': 'Abc', 'Age': 15, 'Location': 'Bangalore', 'Amount': 6000},
+        {'Name': 'Def', 'Age': 43, 'Location': 'Mumbai', 'Amount': 10000},
+        {'Name': 'Uff', 'Age': 30, 'Location': 'Chennai', 'Amount': 7000},
+        {'Name': 'Ammse', 'Age': 87, 'Location': 'Delhi', 'Amount': 6000},
+        {'Name': 'Yysse', 'Age': 28, 'Location': 'Hyderabad', 'Amount': 5000}
+      ]
     };
+
+
   }
   componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
@@ -79,17 +98,46 @@ class Admin extends React.Component {
   };
   getRoutes = routes => {
     return routes.map((prop, key) => {
+
+
       if (prop.layout === "/admin") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
+        if (prop.component === UserProfile){
+          console.log("hit a user profile!");
+          return (
+              <Route
+                  path={prop.layout + prop.path}
+                  key={key}
+                  render={(props) => (
+                    <UserProfile {...this.props} loanList={this.state.loanList} />
+                  )}
+              />
+          );
+        } else if (prop.component === UserProfile){
+          console.log("hit a dashboard!");
+
+          return (
+            <Route
+                  path={prop.layout + prop.path}
+                  key={key}
+                  render={(props) => (
+                      <Dashboard {...this.props} loanList={this.state.loanList}/>
+                  )}
+              />
+          );
+        } else {
+          return (
+              <Route
+                  path={prop.layout + prop.path}
+                  component={prop.component}
+                  key={key}
+              />
+          );
+        }
       } else {
         return null;
       }
+
+
     });
   };
   handleBgClick = color => {
@@ -108,6 +156,7 @@ class Admin extends React.Component {
     return "Brand";
   };
   render() {
+    console.log(this.props);
     return (
       <>
         <div className="wrapper">
@@ -117,7 +166,7 @@ class Admin extends React.Component {
             bgColor={this.state.backgroundColor}
             logo={{
               outterLink: "https://www.creative-tim.com/",
-              text: "Creative Tim",
+              text: "LoanPal",
               imgSrc: logo
             }}
             toggleSidebar={this.toggleSidebar}
@@ -135,7 +184,7 @@ class Admin extends React.Component {
             />
             <Switch>
               {this.getRoutes(routes)}
-              <Redirect from="*" to="/admin/dashboard"/>
+              <Redirect from="*" to="/admin/profile"/>
             </Switch>
             {// we don't want the Footer to be rendered on map page
             this.props.location.pathname.indexOf("maps") !== -1 ? null : (

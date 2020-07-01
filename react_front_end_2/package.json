@@ -5,6 +5,7 @@
   "homepage": "https://demos.creative-tim.com/black-dashboard-react/#/admin/dashboard",
   "dependencies": {
     "@types/react": "16.9.23",
+    "axios": "^0.19.2",
     "chart.js": "2.9.3",
     "classnames": "2.2.6",
     "history": "4.10.1",

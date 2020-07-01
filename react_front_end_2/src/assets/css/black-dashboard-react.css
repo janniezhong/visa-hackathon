@@ -10917,6 +10917,42 @@ hr {
 .off-canvas-sidebar .nav > li > a:focus {
   background: rgba(200, 200, 200, 0.2); }
 
+.fixed-plugin {
+    position: fixed;
+    right: 0;
+    width: 64px;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1031;
+    border-radius: 8px 0 0 8px;
+    text-align: center;
+    top: 130px; }
+.home-view {
+  position: fixed;
+  float: none;
+  width: 100%;
+  min-height: 100vh;
+  border-top: 2px solid #e14eca;
+  background: linear-gradient(#1e1e2f, #1e1e24);
+  -webkit-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+  -moz-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+  -o-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+  -ms-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+  transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+}
+  .home-view[data="blue"] {
+    border-top: 2px solid #1d8cf8; }
+  .home-view[data="green"] {
+    border-top: 2px solid #00f2c3; }
+  .home-view[data="primary"] {
+    border-top: 2px solid #e14eca; }
+  .home-view > .content {
+    padding: 78px 30px 30px 280px;
+    min-height: calc(100vh - 70px); }
+  .home-view > .navbar {
+    margin-bottom: 0; }
+  .home-view .header {
+    margin-bottom: 50px; }
+
 .main-panel {
   position: relative;
   float: right;

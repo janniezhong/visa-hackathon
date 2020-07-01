@@ -23,8 +23,25 @@ import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
+import HomeView from "views/HomeView.js";
 
 var routes = [
+  // {
+  //   path: "/view",
+  //   name: "Home",
+  //   rtlName: "لوحة القيادة",
+  //   icon: "tim-icons icon-chart-pie-36",
+  //   component: HomeView,
+  //   layout: "/home"
+  // },
+  {
+    path: "/profile",
+    name: "Profile",
+    rtlName: "ملف تعريفي للمستخدم",
+    icon: "tim-icons icon-single-02",
+    component: UserProfile,
+    layout: "/admin"
+  },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -55,14 +72,6 @@ var routes = [
     rtlName: "إخطارات",
     icon: "tim-icons icon-bell-55",
     component: Notifications,
-    layout: "/admin"
-  },
-  {
-    path: "/user-profile",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
-    icon: "tim-icons icon-single-02",
-    component: UserProfile,
     layout: "/admin"
   },
   {
