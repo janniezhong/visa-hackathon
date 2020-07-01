@@ -18,16 +18,20 @@ public interface InputRecordDAO {
      */
     void create(String pan,
                 String card_id,
+                String company_name,
+                String address,
+                String city,
                 String country,
                 String state,
-                String city,
-                String company_name,
+                String phone,
+                String email,
                 Integer amount_loaned,
-                Timestamp issue_date,
                 String payment_plan,
+                Timestamp issue_date,
                 Timestamp expected_end_date,
                 Timestamp next_inspection_date,
                 String loan_officer);
+
 
     /**
      * Lists a record from the Input table corresponding to a passed Input id.

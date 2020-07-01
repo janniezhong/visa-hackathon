@@ -26,8 +26,8 @@ public class MainController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String index(){
-        Timestamp time = new Timestamp(System.currentTimeMillis());
-        inputJDBCTemplate.create("pan", "card_id", "US", "California","Sunnyvale", "Apple, Inc.", 6000, time, "one-time", time, time, "John Doe");
+        //Timestamp time = new Timestamp(System.currentTimeMillis());
+        //inputJDBCTemplate.create("pan", "card_id", "US", "California","Sunnyvale", "Apple, Inc.", 6000, time, "one-time", time, time, "John Doe");
         return("home");
     }
 

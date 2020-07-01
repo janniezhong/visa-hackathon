@@ -30,20 +30,23 @@ public class InputJDBCTemplate implements InputRecordDAO {
     @Override
     public void create(String pan,
                        String card_id,
+                       String company_name,
+                       String address,
+                       String city,
                        String country,
                        String state,
-                       String city,
-                       String company_name,
+                       String phone,
+                       String email,
                        Integer amount_loaned,
-                       Timestamp issue_date,
                        String payment_plan,
+                       Timestamp issue_date,
                        Timestamp expected_end_date,
                        Timestamp next_inspection_date,
                        String loan_officer) {
         jdbcTemplateObject = new JdbcTemplate(dataSource);
-        String SQL = "insert into input (pan, card_id, country, state, city, company_name, amount_loaned, issue_date, payment_plan, expected_end_date, next_inspection_date, loan_officer) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String SQL = "insert into input (pan, card_id, company_name, address, city, state, country, phone, email, amount_loaned, payment_plan, issue_date, expected_end_date, next_inspection_date, loan_officer) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        jdbcTemplateObject.update(SQL, pan, card_id, country, state, city, company_name, amount_loaned, issue_date, payment_plan, expected_end_date, next_inspection_date, loan_officer);
+        jdbcTemplateObject.update(SQL, pan, card_id, company_name, address, city, state, country, phone, email, amount_loaned, payment_plan, issue_date, expected_end_date, next_inspection_date, loan_officer);
         System.out.println("Created Record!");
         return;
     }
