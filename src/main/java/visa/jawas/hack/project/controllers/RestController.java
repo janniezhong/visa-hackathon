@@ -23,10 +23,13 @@ import visa.jawas.hack.project.dbconfig.InputJDBCTemplate;
 import visa.jawas.hack.project.dbconfig.InputRecord;
 import javax.net.ssl.SSLContext;
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
@@ -36,7 +39,9 @@ public class RestController {
     CloseableHttpClient httpClient;
 
     private static final String KEY_STORE_PASSWORD = "changeit";
-    private static final String KEY_STORE_PATH = "/Users/janniezhong/Projects/cacerts.jks";
+    private static final String KEY_STORE_PATH = "C:\\Program Files\\Java\\jdk-14.0.1\\lib\\security\\myProject_keyAndCertBundle.jks";
+    private static final String TRUST_STORE_PASSWORD = "changeit";
+    private static final String TRUST_STORE_PATH = "C:\\Program Files\\Java\\jdk-14.0.1\\lib\\security\\cacerts.jks";
 
     @Autowired
     public RestController() throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException {
@@ -61,7 +66,8 @@ public class RestController {
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/RestController/homepage", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Object> getAll() throws IOException {
+    ResponseEntity<Object> getAll() throws IOException, JSONException {
+        System.out.println("Inside of getAll()");
         List<InputRecord> inputRecords = inputJDBCTemplate.listRecords();
         List<HttpResponse> responses = new ArrayList<>();
         for (InputRecord record : inputRecords) {
@@ -71,11 +77,27 @@ public class RestController {
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
-    private HttpResponse getCardInfo(String cardId) throws IOException {
+    private HttpResponse getCardInfo(String cardId) throws IOException, JSONException {
+        System.out.println("Inside of getCardInfo() : " + cardId);
         HttpGet httpGet = new HttpGet("https://sandbox.api.visa.com/dcas/cardservices/v1/cards/"
                 + cardId + "?lookUpBalances=true");
+        System.out.println("https://sandbox.api.visa.com/dcas/cardservices/v1/cards/"
+                + cardId + "?lookUpBalances=true");
         HttpResponse httpResponse = httpClient.execute(httpGet);
-        //System.out.println(httpResponse);
+        StringBuilder textBuilder = new StringBuilder();
+        try (Reader reader = new BufferedReader(new InputStreamReader
+                (httpResponse.getEntity().getContent(), Charset.forName(StandardCharsets.UTF_8.name())))) {
+            int c = 0;
+            while ((c = reader.read()) != -1) {
+                textBuilder.append((char) c);
+            }
+        }
+        System.out.println(textBuilder);
+//        if (httpResponse != null) {
+//            String src = EntityUtils.toString(httpResponse.getEntity());
+//            JSONObject result = new JSONObject(src);
+//            System.out.println(result);
+//        }
         return httpResponse;
     }
 

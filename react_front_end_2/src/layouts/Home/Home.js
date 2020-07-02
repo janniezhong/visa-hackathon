@@ -16,7 +16,6 @@
 
 */
 import React from "react";
-//import axios from 'axios';
 
 import { Route, Switch, Redirect } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
@@ -42,6 +41,7 @@ class Home extends React.Component {
 
         axios.get('http://localhost:8080/RestController/homepage')
             .then(response => {
+                console.log("test");
                 console.log(response.data);
             })
 
