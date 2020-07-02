@@ -39,9 +39,10 @@ public class RestController {
     CloseableHttpClient httpClient;
 
     private static final String KEY_STORE_PASSWORD = "changeit";
-    private static final String KEY_STORE_PATH = "C:\\Program Files\\Java\\jdk-14.0.1\\lib\\security\\myProject_keyAndCertBundle.jks";
+    private static final String KEY_STORE_PATH = "C:/Program Files/Java/jdk-14.0.1/lib/security/visaKeystore.jks";
+    private static final String PRIVATE_KEY_PASSWORD = "TqK123QPiBAU9i2h3z";
     private static final String TRUST_STORE_PASSWORD = "changeit";
-    private static final String TRUST_STORE_PATH = "C:\\Program Files\\Java\\jdk-14.0.1\\lib\\security\\cacerts.jks";
+    private static final String TRUST_STORE_PATH = "C:/Program Files/Java/jdk-14.0.1/lib/security/cacerts.jks";
 
     @Autowired
     public RestController() throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException {
@@ -51,10 +52,14 @@ public class RestController {
         InputStream keyStoreData = new FileInputStream(KEY_STORE_PATH);
         ks.load(keyStoreData, KEY_STORE_PASSWORD.toCharArray());
         SSLContext sslcontext = SSLContexts.custom()
+                .loadKeyMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray(),KEY_STORE_PASSWORD.toCharArray())
                 .loadTrustMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray())
-                .loadKeyMaterial(ks, KEY_STORE_PASSWORD.toCharArray())
                 .build();
 
+        System.out.println(SSLContexts.custom()
+                .loadKeyMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray(),KEY_STORE_PASSWORD.toCharArray())
+                .loadTrustMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray())
+                );
         // Allow TLSv1.2 protocol only
         SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslcontext, new String[]{"TLSv1.2"}, null,
                 SSLConnectionSocketFactory.getDefaultHostnameVerifier());
@@ -73,8 +78,7 @@ public class RestController {
         for (InputRecord record : inputRecords) {
             responses.add(getCardInfo(record.getCard_id()));
         }
-        System.out.println("Response: " + responses); // not printing!
-        return new ResponseEntity<>(responses, HttpStatus.OK);
+        return new ResponseEntity<>(inputRecords, HttpStatus.OK);
     }
 
     private HttpResponse getCardInfo(String cardId) throws IOException, JSONException {
@@ -92,12 +96,6 @@ public class RestController {
                 textBuilder.append((char) c);
             }
         }
-        System.out.println(textBuilder);
-//        if (httpResponse != null) {
-//            String src = EntityUtils.toString(httpResponse.getEntity());
-//            JSONObject result = new JSONObject(src);
-//            System.out.println(result);
-//        }
         return httpResponse;
     }
 

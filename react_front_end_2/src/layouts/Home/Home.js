@@ -39,16 +39,19 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
 
+        var data;
+
         axios.get('http://localhost:8080/RestController/homepage')
             .then(response => {
-                console.log("test");
-                console.log(response.data);
+                data = response.data;
+                console.log(data);
             })
 
         this.state = {
             backgroundColor: "blue",
             sidebarOpened:
                 document.documentElement.className.indexOf("nav-open") !== -1,
+            //loanList: data;
             loanList: [
                 {
                     'pan': 'insertPANhere1',
