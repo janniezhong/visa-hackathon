@@ -23,6 +23,8 @@ import visa.jawas.hack.project.dbconfig.InputJDBCTemplate;
 import visa.jawas.hack.project.dbconfig.InputRecord;
 import javax.net.ssl.SSLContext;
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.cert.CertificateException;
 import java.util.ArrayList;
@@ -36,7 +38,10 @@ public class RestController {
     CloseableHttpClient httpClient;
 
     private static final String KEY_STORE_PASSWORD = "changeit";
-    private static final String KEY_STORE_PATH = "/Users/janniezhong/Projects/cacerts.jks";
+    private static final String KEY_STORE_PATH = "C:/Program Files/Java/jdk-14.0.1/lib/security/visaKeystore.jks";
+    private static final String PRIVATE_KEY_PASSWORD = "TqK123QPiBAU9i2h3z";
+    private static final String TRUST_STORE_PASSWORD = "changeit";
+    private static final String TRUST_STORE_PATH = "C:/Program Files/Java/jdk-14.0.1/lib/security/cacerts.jks";
 
     @Autowired
     public RestController() throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException {
@@ -46,10 +51,14 @@ public class RestController {
         InputStream keyStoreData = new FileInputStream(KEY_STORE_PATH);
         ks.load(keyStoreData, KEY_STORE_PASSWORD.toCharArray());
         SSLContext sslcontext = SSLContexts.custom()
+                .loadKeyMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray(),KEY_STORE_PASSWORD.toCharArray())
                 .loadTrustMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray())
-                .loadKeyMaterial(ks, KEY_STORE_PASSWORD.toCharArray())
                 .build();
 
+        System.out.println(SSLContexts.custom()
+                .loadKeyMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray(),KEY_STORE_PASSWORD.toCharArray())
+                .loadTrustMaterial(new File(KEY_STORE_PATH), KEY_STORE_PASSWORD.toCharArray())
+                );
         // Allow TLSv1.2 protocol only
         SSLConnectionSocketFactory sslSocketFactory = new SSLConnectionSocketFactory(sslcontext, new String[]{"TLSv1.2"}, null,
                 SSLConnectionSocketFactory.getDefaultHostnameVerifier());
@@ -61,22 +70,31 @@ public class RestController {
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/RestController/homepage", method = RequestMethod.GET)
     public @ResponseBody
-    ResponseEntity<Object> getAll() throws IOException {
+    ResponseEntity<Object> getAll() throws IOException, JSONException {
+        System.out.println("Inside of getAll()");
         List<InputRecord> inputRecords = inputJDBCTemplate.listRecords();
         List<HttpResponse> responses = new ArrayList<>();
         for (InputRecord record : inputRecords) {
             responses.add(getCardInfo(record.getCard_id()));
         }
-        System.out.println("records: " + inputRecords.get(1).toString());
-        System.out.println("Response: " + responses.get(1).toString()); // not printing!
-        return new ResponseEntity<>(responses, HttpStatus.OK);
+        return new ResponseEntity<>(inputRecords, HttpStatus.OK);
     }
 
-    private HttpResponse getCardInfo(String cardId) throws IOException {
+    private HttpResponse getCardInfo(String cardId) throws IOException, JSONException {
+        System.out.println("Inside of getCardInfo() : " + cardId);
         HttpGet httpGet = new HttpGet("https://sandbox.api.visa.com/dcas/cardservices/v1/cards/"
                 + cardId + "?lookUpBalances=true");
+        System.out.println("https://sandbox.api.visa.com/dcas/cardservices/v1/cards/"
+                + cardId + "?lookUpBalances=true");
         HttpResponse httpResponse = httpClient.execute(httpGet);
-        //System.out.println(httpResponse);
+        StringBuilder textBuilder = new StringBuilder();
+        try (Reader reader = new BufferedReader(new InputStreamReader
+                (httpResponse.getEntity().getContent(), Charset.forName(StandardCharsets.UTF_8.name())))) {
+            int c = 0;
+            while ((c = reader.read()) != -1) {
+                textBuilder.append((char) c);
+            }
+        }
         return httpResponse;
     }
 

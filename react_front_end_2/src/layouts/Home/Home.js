@@ -16,7 +16,6 @@
 
 */
 import React from "react";
-//import axios from 'axios';
 
 import { Route, Switch, Redirect } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
@@ -40,51 +39,21 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
 
+        let responses = "test";
+
         axios.get('http://localhost:8080/RestController/homepage')
             .then(response => {
-                console.log(response.data);
+                responses = response.data;
+                console.log(responses);
+                console.log(responses[0]);
+                this.setState({loanList: responses});
             })
 
+        console.log("does this work? : " + responses);
         this.state = {
             backgroundColor: "blue",
             sidebarOpened:
-                document.documentElement.className.indexOf("nav-open") !== -1,
-            loanList: [
-                {
-                    'pan': 'insertPANhere1',
-                    'card_id': 'cardidhere1',
-                    'company_name': 'Azure Source Capital',
-                    'address': 'Calle Arture Ambrogi #19-303',
-                    'city':'San Salvador',
-                    'state':'',
-                    'country': 'El Salvador',
-                    'phone':'50325666555',
-                    'email':'info@azure.com.sv',
-                    'amount_loaned':60000,
-                    'payment_plan':'one-time',
-                    'issue_date':'2018-05-06T00:00:00.00Z',
-                    'expected_end_date':'2021-05-06T00:00:00.00Z',
-                    'next_inspection_date':'2020-10-05T00:00:00.00Z',
-                    'loan_officer':'John Doe'
-                },
-                {
-                    'pan': 'insertPANhere2',
-                    'card_id': 'cardidhere2',
-                    'company_name': 'Tridi Oasis',
-                    'address': 'Jl. Industri No.22',
-                    'city':'Bojong Jaya, Karawaci, Kota Tangerang',
-                    'state':'Banten',
-                    'country': 'Indonesia',
-                    'phone':'47183927382',
-                    'email':'dinda.ishlad@tridi-oasis.com',
-                    'amount_loaned':40000,
-                    'payment_plan':'one-time',
-                    'issue_date':'2016-12-20T00:00:00.00Z',
-                    'expected_end_date':'2023-12-20T00:00:00.00Z',
-                    'next_inspection_date':'2020-11-05T00:00:00.00Z',
-                    'loan_officer':'Jane Doe'
-                }
-            ]
+                document.documentElement.className.indexOf("nav-open") !== -1
         };
     }
     componentDidMount() {
