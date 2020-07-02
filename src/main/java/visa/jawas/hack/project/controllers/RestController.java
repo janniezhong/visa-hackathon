@@ -37,8 +37,8 @@ public class RestController {
     InputJDBCTemplate inputJDBCTemplate;
     CloseableHttpClient httpClient;
 
-    private static final String KEY_STORE_PASSWORD = "changeit";
-    private static final String KEY_STORE_PATH = "C:/Program Files/Java/jdk-14.0.1/lib/security/visaKeystore.jks";
+    private static final String KEY_STORE_PASSWORD = "password";
+    private static final String KEY_STORE_PATH = "/Users/janniezhong/Projects/vdp_cert/myProject_keyAndCertBundle.jks";
     private static final String PRIVATE_KEY_PASSWORD = "TqK123QPiBAU9i2h3z";
     private static final String TRUST_STORE_PASSWORD = "changeit";
     private static final String TRUST_STORE_PATH = "C:/Program Files/Java/jdk-14.0.1/lib/security/cacerts.jks";

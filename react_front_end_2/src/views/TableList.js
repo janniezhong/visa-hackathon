@@ -27,135 +27,188 @@ import {
   Row,
   Col
 } from "reactstrap";
+import {NavLink} from "react-router-dom";
 
 class Tables extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.getHeader = this.getHeader.bind(this);
+    this.getRowsData = this.getRowsData.bind(this);
+    this.getKeys = this.getKeys.bind(this);
+
+    this.state = {
+      transactions:[
+        {
+          "amount": -1.72,
+          "address": "1234 Main Street",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "100 - Highlands Ranch",
+          "transactionDescription": "Funds Transfer Fee"
+        },
+        {
+          "amount": 50.0,
+          "address": "1234 Main Street",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "100 - Highlands Ranch",
+          "transactionDescription": "Manual Card Reload"
+        },
+        {
+          "amount": -10.0,
+          "address": "1234 Main Street",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "RELOADABLEUP",
+          "transactionDescription": "ACH Funds Transfer Debit"
+        },
+        {
+          "amount": -5.0,
+          "address": "123 Main St.",
+          "city": "Your Town",
+          "region": "Colorado",
+          "merchantName": "Sample Financial Institute",
+          "transactionDescription": "Replacement Card Fee"
+        },
+        {
+          "amount": -14.0,
+          "address": "123 Main St.",
+          "city": "Your Town",
+          "region": "Colorado",
+          "merchantName": "Sample Financial Institute",
+          "transactionDescription": "Replacement Card Fee"
+        },
+        {
+          "amount": -15.0,
+          "address": "4321 Main Street",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "RELOADABLEUP",
+          "transactionDescription": "ACH Funds Transfer Debit"
+        },
+        {
+          "amount": 50.0,
+          "address": "321 Surreal St",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "100 - Highlands Ranch",
+          "transactionDescription": "Manual Card Reload"
+        },
+        {
+          "amount": -1.72,
+          "address": "1738 Hallow St.",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "100 - Highlands Ranch",
+          "transactionDescription": "Funds Transfer Fee"
+        },
+        {
+          "amount": -1.72,
+          "address": "1738 Hallow St.",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "100 - Highlands Ranch",
+          "transactionDescription": "Funds Transfer Fee"
+        },
+        {
+          "amount": -10.0,
+          "address": "1234 Main Street",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "RELOADABLEUP",
+          "transactionDescription": "ACH Funds Transfer Debit"
+        },
+        {
+          "amount": -12.0,
+          "address": "321 Blue St.",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "Sample Financial Institute",
+          "transactionDescription": "Replacement Card Fee"
+        },
+        {
+          "amount": -20.0,
+          "address": "4321 Main Street",
+          "city": "Denver",
+          "region": "Colorado",
+          "merchantName": "RELOADABLEUP",
+          "transactionDescription": "Replacement Card Fee"
+        }
+      ]
+
+    }
+
+  }
+
+  getKeys = function(){
+    return Object.keys(this.state.transactions[0]);
+
+  }
+  getRowsData = function(){
+    var items = this.state.transactions;
+    var keys = this.getKeys();
+    return items.map((row, index) => {
+      return <tr key={index}><RenderRow key={index} data={row} keys={keys}/></tr>
+    })
+  }
+  getHeader = function(){
+    var keys = this.getKeys();
+    return keys.map((key, index) => {
+      return <th key={key}>{key.toUpperCase()}</th>
+    })
+  }
+
+
   render() {
+    const transactionList = this.state.transactions;
+    if (!transactionList){
+      console.log("something is wrong!");
+      return null;
+    }
     return (
-      <>
         <div className="content">
           <Row>
             <Col md="12">
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Simple Table</CardTitle>
+                    <CardTitle tag="h4">Transactions</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <Table className="tablesorter" responsive>
+                  <Table className="tablesorter">
                     <thead className="text-primary">
-                      <tr>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th className="text-center">Salary</th>
-                      </tr>
+                    {/*{*/}
+                    {/*  transactionList ? (*/}
+                    {/*        <tr> {this.getHeader()} </tr>*/}
+                    {/*    ) :null*/}
+                    {/*}*/}
+                    <tr>
+                      <th>
+                        Amount
+                      </th>
+                      <th>
+                        Address
+                      </th>
+                      <th>
+                        City
+                      </th>
+                      <th>
+                        Region
+                      </th>
+                      <th>
+                        Merchant Name
+                      </th>
+                      <th>
+                        Description
+                      </th>
+                    </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Dakota Rice</td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                        <td className="text-center">$36,738</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                        <td className="text-center">$23,789</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-center">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-center">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-center">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$98,615</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col md="12">
-              <Card className="card-plain">
-                <CardHeader>
-                  <CardTitle tag="h4">Table on Plain Background</CardTitle>
-                  <p className="category">Here is a subtitle for this table</p>
-                </CardHeader>
-                <CardBody>
-                  <Table className="tablesorter" responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        <th>Name</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th className="text-center">Salary</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Dakota Rice</td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                        <td className="text-center">$36,738</td>
-                      </tr>
-                      <tr>
-                        <td>Minerva Hooper</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                        <td className="text-center">$23,789</td>
-                      </tr>
-                      <tr>
-                        <td>Sage Rodriguez</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                        <td className="text-center">$56,142</td>
-                      </tr>
-                      <tr>
-                        <td>Philip Chaney</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                        <td className="text-center">$38,735</td>
-                      </tr>
-                      <tr>
-                        <td>Doris Greene</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                        <td className="text-center">$63,542</td>
-                      </tr>
-                      <tr>
-                        <td>Mason Porter</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$78,615</td>
-                      </tr>
-                      <tr>
-                        <td>Jon Porter</td>
-                        <td>Portugal</td>
-                        <td>Gloucester</td>
-                        <td className="text-center">$98,615</td>
-                      </tr>
+                    {
+                      transactionList ? (
+                          this.getRowsData()
+                      ) : null
+                    }
                     </tbody>
                   </Table>
                 </CardBody>
@@ -163,9 +216,33 @@ class Tables extends React.Component {
             </Col>
           </Row>
         </div>
-      </>
     );
   }
 }
+
+const RenderRow = (props) =>{
+  return props.keys.map((key, index)=>{
+
+    if (key == "company_name"){
+      return <td key={props.data[key]}>
+        <NavLink
+            to={{
+              pathname:"/admin/profile",
+              state: {name: props.data[key]}
+            }}
+            className="nav-link"
+            activeClassName="active"
+        >
+          {props.data[key]}
+        </NavLink>
+
+      </td>
+    } else {
+      return <td key={props.data[key]}>{props.data[key]}</td>
+    }
+
+  })
+}
+
 
 export default Tables;

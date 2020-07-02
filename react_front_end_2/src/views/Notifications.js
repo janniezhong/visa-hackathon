@@ -122,34 +122,10 @@ class Notifications extends React.Component {
                   <CardTitle tag="h4">Upcoming Check Ins</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <UncontrolledAlert color="danger">
-                    <span>
-                      <b>Warning - </b>
-                      You have an upcoming check-in on 06/28/2020.
-                    </span>
-                  </UncontrolledAlert>
-                  <UncontrolledAlert color="primary">
-                    <span>
-                      <b>Primary - </b>
-                      This is a regular notification made with ".alert-primary"
-                    </span>
-                  </UncontrolledAlert>
-                  <UncontrolledAlert color="info">
-                    <span>
-                      <b>Info - </b>
-                      This is a regular notification made with ".alert-info"
-                    </span>
-                  </UncontrolledAlert>
                   <UncontrolledAlert color="success">
                     <span>
-                      <b>Success - </b>
-                      This is a regular notification made with ".alert-success"
-                    </span>
-                  </UncontrolledAlert>
-                  <UncontrolledAlert color="warning">
-                    <span>
-                      <b>Warning - </b>
-                      This is a regular notification made with ".alert-warning"
+                      <b>Yay! - </b>
+                      No upcoming check ins.
                     </span>
                   </UncontrolledAlert>
                 </CardBody>
