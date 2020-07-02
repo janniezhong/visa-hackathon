@@ -67,7 +67,8 @@ public class RestController {
         for (InputRecord record : inputRecords) {
             responses.add(getCardInfo(record.getCard_id()));
         }
-        System.out.println("Response: " + responses); // not printing!
+        System.out.println("records: " + inputRecords.get(1).toString());
+        System.out.println("Response: " + responses.get(1).toString()); // not printing!
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 

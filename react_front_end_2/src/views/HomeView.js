@@ -80,18 +80,6 @@ class HomeView extends React.Component {
         })
     }
 
-    // renderTableData() {
-    //     return this.state.loanList.map((company, index) => {
-    //         const { name, age, location } = company //destructuring
-    //         return (
-    //             <tr key={name}>
-    //                 <td>{name}</td>
-    //                 <td>{age}</td>
-    //                 <td>{location}</td>
-    //             </tr>
-    //         )
-    //     })
-    // }
 
 
     render() {
@@ -140,6 +128,18 @@ class HomeView extends React.Component {
                                             this.getRowsData()
                                         ) : null
                                     }
+                                    <tr>
+                                    <td> <NavLink
+                                        to={{
+                                            pathname:"/create"
+                                        }}
+                                        className="nav-link"
+                                        activeClassName="active"
+                                    >
+                                        Create a New Loan...
+                                    </NavLink>
+                                    </td>
+                                    </tr>
                                     </tbody>
                                 </Table>
                             </CardBody>
