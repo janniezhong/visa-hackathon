@@ -56,8 +56,8 @@ class Admin extends React.Component {
       loanName: null,
       loanList: [
         {
-          'pan': 'insertPANhere1',
-          'card_id': 'cardidhere1',
+          'pan': '4883836336860016',
+          'card_id': '8d212293-c6bc-4738-afaf-bc0ae5456df5',
           'company_name': 'Azure Source Capital',
           'address': 'Calle Arture Ambrogi #19-303',
           'city':'San Salvador',
@@ -67,14 +67,14 @@ class Admin extends React.Component {
           'email':'info@azure.com.sv',
           'amount_loaned':60000,
           'payment_plan':'one-time',
-          'issue_date':'2018-05-06T00:00:00.00Z',
-          'expected_end_date':'2021-05-06T00:00:00.00Z',
-          'next_inspection_date':'2020-10-05T00:00:00.00Z',
+          'issue_date':'2018-05-06',
+          'expected_end_date':'2021-05-06',
+          'next_inspection_date':'2020-10-05',
           'loan_officer':'John Doe'
         },
         {
-          'pan': 'insertPANhere2',
-          'card_id': 'cardidhere2',
+          'pan': '4169334953890037',
+          'card_id': '7a353971-l4uo-9877-algd-lz1fe25349i9',
           'company_name': 'Tridi Oasis',
           'address': 'Jl. Industri No.22',
           'city':'Bojong Jaya, Karawaci, Kota Tangerang',
@@ -84,10 +84,44 @@ class Admin extends React.Component {
           'email':'dinda.ishlad@tridi-oasis.com',
           'amount_loaned':40000,
           'payment_plan':'one-time',
-          'issue_date':'2016-12-20T00:00:00.00Z',
-          'expected_end_date':'2023-12-20T00:00:00.00Z',
-          'next_inspection_date':'2020-11-05T00:00:00.00Z',
+          'issue_date':'2016-12-20',
+          'expected_end_date':'2023-12-20',
+          'next_inspection_date':'2020-11-5',
           'loan_officer':'Jane Doe'
+        },
+        {
+          'pan': '4105837613490022',
+          'card_id': '7a353971-l4uo-9877-algd-bp0df3321ly2',
+          'company_name': 'Quadria Capital',
+          'address': '11-A, Stanley Street',
+          'city':'Telok Ayer',
+          'state':'Chinatown',
+          'country': 'Singapore',
+          'phone':'6568059699',
+          'email':'contact@quadria.com',
+          'amount_loaned':14000,
+          'payment_plan':'monthly',
+          'issue_date':'2019-02-28',
+          'expected_end_date':'2021-02-28',
+          'next_inspection_date':'2020-08-19',
+          'loan_officer':'Joe Smith'
+        },
+        {
+          'pan': '4386624808860046',
+          'card_id': '7a353971-l4uo-9877-algd-bd3zl43218j9',
+          'company_name': 'Islamabad Diagnostics',
+          'address': '13-A, Kohistan Road',
+          'city':'Islamabad',
+          'state':'Islamabad Capital Territory',
+          'country': 'Pakistan',
+          'phone':'92512263737',
+          'email':'info@idc.net.pk',
+          'amount_loaned':100000,
+          'payment_plan':'one-time',
+          'issue_date':'2020-01-18',
+          'expected_end_date':'2022-01-18',
+          'next_inspection_date':'2020-09-06',
+          'loan_officer':'Sarah Chen'
         }
       ]
     };

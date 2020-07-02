@@ -24,15 +24,12 @@ import {
     CardHeader,
     CardBody,
     CardFooter,
-    CardText,
     FormGroup,
     Form,
     Input,
     Row,
     Col
 } from "reactstrap";
-import {Route} from "react-router-dom";
-import HomeView from "./HomeView";
 
 class CreateLoan extends React.Component {
     constructor(props) {
@@ -40,9 +37,7 @@ class CreateLoan extends React.Component {
         this.state = {}
     }
 
-
     render() {
-
         return (
             <>
                 <div className="content">
