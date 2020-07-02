@@ -25,6 +25,7 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import AdminLayout from "layouts/Admin/Admin.js";
 import RTLLayout from "layouts/RTL/RTL.js";
 import HomeLayout from "layouts/Home/Home.js";
+import CreateLoan from "views/CreateLoan.js";
 
 
 import "assets/scss/black-dashboard-react.scss";
@@ -39,8 +40,8 @@ ReactDOM.render(
     <Switch>
       <Route path="/admin" render={props => <AdminLayout {...props} />} />
       <Route path="/home" render={props => <HomeLayout {...props} />} />
+      <Route path="/create" render={props => <CreateLoan {...props} />} />
 
-        {/*<Route path="/rtl" render={props => <RTLLayout {...props} />} />*/}
       {/*<Redirect from="/" to="/admin/dashboard" />*/}
       <Redirect from="/" to="/home/view" />
     </Switch>
