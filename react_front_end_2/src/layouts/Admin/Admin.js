@@ -121,7 +121,7 @@ class Admin extends React.Component {
           'issue_date':'2020-01-18',
           'expected_end_date':'2022-01-18',
           'next_inspection_date':'2020-09-06',
-          'loan_officer':'Sarah Chen'
+          'loan_officer':'Sarah Bollinger'
         }
       ]
     };

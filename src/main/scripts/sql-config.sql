@@ -47,8 +47,8 @@ create table input (pan varchar(255), card_id varchar(255), company_name varchar
 INSERT INTO input (pan, card_id, company_name, address, city, state, country, phone, email, amount_loaned, payment_plan, issue_date, expected_end_date, next_inspection_date, loan_officer)
 VALUES ("4883836336860016","8d212293-c6bc-4738-afaf-bc0ae5456df5","Azure Source Capital", "Calle Arture Ambrogi #19-303", "San Salvador", "", "El Salvador", "50325666555","info@azure.com.sv","60000", "one-time", "2018-05-06", "2021-05-06", "2020-10-05", "John Doe"),
        ("4169334953890037","7a353971-l4uo-9877-algd-lz1fe25349i9","Tridi Oasis", "Jl. Industri No.22", "Bojong Jaya, Karawaci, Kota Tangerang", "Banten", "Indonesia", "47183927382", "dinda.ishlad@tridi-oasis.com", "40000", "one-time", "2016-12-20", "2023-12-20", "2020-11-5", "Jane Doe"),
-       ("4105837613490022","7a353971-l4uo-9877-algd-bp0df3321ly2", "Quadria Capital", "11-A, Stanley Street", "Telok Ayer", "Chinatown", "Singapore", "6568059699", "contact@quadria.com", "14000", "monthly", "2019-02-28", "2021-02-28", "2020-08-19", "John Doe"),
-       ("4386624808860046","7a353971-l4uo-9877-algd-bd3zl43218j9", "Islamabad Diagnostics", "13-A, Kohistan Road", "Islamabad", "Islamabad Capital Territory", "Pakistan", "92512263737", "info@idc.net.pk", "100000", "one-time", "2020-01-18", "2022-01-18", "2020-09-06", "John Doe");
+       ("4105837613490022","7a353971-l4uo-9877-algd-bp0df3321ly2", "Quadria Capital", "11-A, Stanley Street", "Telok Ayer", "Chinatown", "Singapore", "6568059699", "contact@quadria.com", "14000", "monthly", "2019-02-28", "2021-02-28", "2020-08-19", "Joe Smith"),
+       ("4386624808860046","7a353971-l4uo-9877-algd-bd3zl43218j9", "Islamabad Diagnostics", "13-A, Kohistan Road", "Islamabad", "Islamabad Capital Territory", "Pakistan", "92512263737", "info@idc.net.pk", "100000", "one-time", "2020-01-18", "2022-01-18", "2020-09-06", "Sarah Bollinger");
 
 # #Example Stored Procedure
 # DELIMITER $$
