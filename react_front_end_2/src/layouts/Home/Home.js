@@ -43,48 +43,13 @@ class Home extends React.Component {
         axios.get('http://localhost:8080/RestController/homepage')
             .then(response => {
                 console.log(response.data);
+                this.setState({loanList:response.data});
             })
 
         this.state = {
             backgroundColor: "blue",
             sidebarOpened:
-                document.documentElement.className.indexOf("nav-open") !== -1,
-            loanList: [
-                {
-                    'pan': 'insertPANhere1',
-                    'card_id': 'cardidhere1',
-                    'company_name': 'Azure Source Capital',
-                    'address': 'Calle Arture Ambrogi #19-303',
-                    'city':'San Salvador',
-                    'state':'',
-                    'country': 'El Salvador',
-                    'phone':'50325666555',
-                    'email':'info@azure.com.sv',
-                    'amount_loaned':60000,
-                    'payment_plan':'one-time',
-                    'issue_date':'2018-05-06T00:00:00.00Z',
-                    'expected_end_date':'2021-05-06T00:00:00.00Z',
-                    'next_inspection_date':'2020-10-05T00:00:00.00Z',
-                    'loan_officer':'John Doe'
-                },
-                {
-                    'pan': 'insertPANhere2',
-                    'card_id': 'cardidhere2',
-                    'company_name': 'Tridi Oasis',
-                    'address': 'Jl. Industri No.22',
-                    'city':'Bojong Jaya, Karawaci, Kota Tangerang',
-                    'state':'Banten',
-                    'country': 'Indonesia',
-                    'phone':'47183927382',
-                    'email':'dinda.ishlad@tridi-oasis.com',
-                    'amount_loaned':40000,
-                    'payment_plan':'one-time',
-                    'issue_date':'2016-12-20T00:00:00.00Z',
-                    'expected_end_date':'2023-12-20T00:00:00.00Z',
-                    'next_inspection_date':'2020-11-05T00:00:00.00Z',
-                    'loan_officer':'Jane Doe'
-                }
-            ]
+                document.documentElement.className.indexOf("nav-open") !== -1
         };
     }
     componentDidMount() {
